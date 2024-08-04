@@ -1,3 +1,57 @@
-[gd_scene format=3 uid="uid://bu2mf00krr7ha"]
+[gd_scene load_steps=7 format=3 uid="uid://bu2mf00krr7ha"]
+
+[ext_resource type="PackedScene" uid="uid://dxwc52427eyqw" path="res://paddle.tscn" id="1_8g836"]
+[ext_resource type="Script" path="res://main.gd" id="1_xskst"]
+[ext_resource type="PackedScene" uid="uid://bglovxg5ncqdq" path="res://ball.tscn" id="2_gu048"]
+[ext_resource type="Texture2D" uid="uid://jokju05pkycu" path="res://assets/wall.png" id="4_s6cga"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3v1l"]
+size = Vector2(10, 1000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dip5"]
+size = Vector2(780, 10)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_xskst")
+ball_scene = ExtResource("2_gu048")
+
+[node name="Paddle" parent="." instance=ExtResource("1_8g836")]
+position = Vector2(401, 510)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(5, 500)
+shape = SubResource("RectangleShape2D_n3v1l")
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftWall"]
+position = Vector2(5, 500)
+scale = Vector2(1, 20)
+texture = ExtResource("4_s6cga")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(10, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+position = Vector2(390, 5)
+shape = SubResource("RectangleShape2D_4dip5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ceiling"]
+position = Vector2(389.999, 5.00355)
+rotation = 1.57079
+scale = Vector2(1, 15.6001)
+texture = ExtResource("4_s6cga")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(790, 0)
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(5, 500)
+shape = SubResource("RectangleShape2D_n3v1l")
+
+[node name="Sprite2D" type="Sprite2D" parent="RightWall"]
+position = Vector2(5, 500)
+scale = Vector2(1, 20)
+texture = ExtResource("4_s6cga")
